@@ -1,0 +1,9 @@
+DATASTORE_PATH
+
+projects/finlearn-hackathon/locations/global/collections/default_collection/dataStores/finlearn-kb
+
+ou celui là
+
+projects/thebudge/databases/(default)/documents/the-budge-knowledge-base
+
+le prblm c'est que je ne sais pas où le trouver, c'est affiché nulle part sur GCP datastore

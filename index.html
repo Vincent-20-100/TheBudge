@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="theme-color" content="#58CC02" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>The Budge - Apprendre la Finance</title>
+    <script>
+      try {
+        var t = localStorage.getItem('theme-preference');
+        if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark-theme');
+        }
+      } catch(e) {}
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body, html, #root {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      html, body, #root {
+        transition: background-color 0.25s ease, color 0.25s ease;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      -ms-overflow-style: none;
+      * {
+        scrollbar-width: none;
+      }
+
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Duolingo green color scheme */
+      :root {
+        --duolingo-green: #58CC02;
+        --duolingo-green-dark: #4CAF00;
+        --duolingo-green-light: #7ED321;
+        --duolingo-blue: #1CB0F6;
+        --duolingo-yellow: #FFC800;
+        --duolingo-red: #FF4B4B;
+      }
+
+      html.dark-theme,
+      html.dark-theme body,
+      html.dark-theme #root {
+        background-color: #0b1220;
+        color: #e2e8f0;
+      }
+
+      html.dark-theme .app-shell {
+        background-color: #0f172a !important;
+        box-shadow: 0 20px 50px rgba(2, 6, 23, 0.6);
+      }
+
+      html.dark-theme .bg-white:not(.bg-opacity-10):not(.bg-opacity-20):not(.bg-opacity-30):not(.bg-opacity-40):not(.bg-opacity-50) {
+        background-color: #111827 !important;
+      }
+
+      html.dark-theme .bg-gray-50 {
+        background-color: #1f2937 !important;
+      }
+
+      html.dark-theme .bg-gray-100 {
+        background-color: #1f2937 !important;
+      }
+
+      html.dark-theme .bg-gray-200 {
+        background-color: #334155 !important;
+      }
+
+      html.dark-theme .border-gray-100,
+      html.dark-theme .border-gray-200,
+      html.dark-theme .border-gray-300 {
+        border-color: #334155 !important;
+      }
+
+      html.dark-theme .text-gray-900 {
+        color: #f8fafc !important;
+      }
+
+      html.dark-theme .text-gray-800 {
+        color: #e2e8f0 !important;
+      }
+
+      html.dark-theme .text-gray-700 {
+        color: #cbd5e1 !important;
+      }
+
+      html.dark-theme .text-gray-600 {
+        color: #94a3b8 !important;
+      }
+
+      html.dark-theme .text-gray-500 {
+        color: #94a3b8 !important;
+      }
+
+      html.dark-theme .text-gray-400 {
+        color: #64748b !important;
+      }
+
+      html.dark-theme .hover\:bg-gray-50:hover,
+      html.dark-theme .hover\:bg-gray-100:hover {
+        background-color: #334155 !important;
+      }
+
+      /* Preserve French flag colors in dark mode */
+      html.dark-theme .french-flag-shell {
+        background-color: #ffffff !important;
+      }
+
+      html.dark-theme .french-flag-white {
+        background-color: #ffffff !important;
+      }
+
+      /* Night mode switch (React snippet style) */
+      .switch {
+        display: block;
+        --width-of-switch: 3.5em;
+        --height-of-switch: 2em;
+        --size-of-icon: 1.4em;
+        --slider-offset: 0.3em;
+        position: relative;
+        width: var(--width-of-switch);
+        height: var(--height-of-switch);
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #f4f4f5;
+        transition: .4s;
+        border-radius: 30px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: var(--size-of-icon, 1.4em);
+        width: var(--size-of-icon, 1.4em);
+        border-radius: 20px;
+        left: var(--slider-offset, 0.3em);
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #303136;
+      }
+
+      input:checked + .slider:before {
+        left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
+        background: #303136;
+        box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.1/client"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
