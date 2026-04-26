@@ -11,23 +11,23 @@ name: Keep Supabase Alive
 on:
   # Runs automatically every Monday at 8:00 AM UTC
   # Cron syntax: minute hour day-of-month month day-of-week
-  # '0 8 * * 1' = at 08:00, only on Monday schedule:
+  schedule:
     - cron: '0 8 * * 1'
 
-  # Allows you to trigger this workflow manually from the
-  # GitHub Actions tab in your repository (useful for testing)
+  # Allows manual trigger from the GitHub Actions tab
   workflow_dispatch:
 
 jobs:
   ping:
-    # Use the latest Ubuntu runner provided by GitHub (free) runs-on: ubuntu-latest
+    # Use the latest Ubuntu runner provided by GitHub (free)
+    runs-on: ubuntu-latest
 
     steps:
       - name: Ping Supabase REST API
         run: |
           # Send a GET request to the Supabase REST API root endpoint.
           # This is enough to signal activity and prevent the project
-          # from being paused, no data is read or modified.
+          # from being paused — no data is read or modified.
           curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
