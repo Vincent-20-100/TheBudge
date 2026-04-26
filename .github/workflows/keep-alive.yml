@@ -1,0 +1,33 @@
+# ============================================================
+# GitHub Actions Workflow: Keep Supabase Project Alive
+# ============================================================
+# Supabase automatically pauses free-tier projects after 7 days
+# of inactivity. This workflow sends a lightweight HTTP request
+# to the Supabase REST API on a weekly schedule to prevent that.
+# ============================================================
+
+name: Keep Supabase Alive
+
+on:
+  # Runs automatically every Monday at 8:00 AM UTC
+  # Cron syntax: minute hour day-of-month month day-of-week
+  # '0 8 * * 1' = at 08:00, only on Monday schedule:
+    - cron: '0 8 * * 1'
+
+  # Allows you to trigger this workflow manually from the
+  # GitHub Actions tab in your repository (useful for testing)
+  workflow_dispatch:
+
+jobs:
+  ping:
+    # Use the latest Ubuntu runner provided by GitHub (free) runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          # Send a GET request to the Supabase REST API root endpoint.
+          # This is enough to signal activity and prevent the project
+          # from being paused, no data is read or modified.
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
